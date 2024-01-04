@@ -103,6 +103,7 @@ public class DriveUtils {
             drive.files().update(prevUpload.getId(), updateMeta, new FileContent("text/plain", tempFile.toFile())).execute();
         }
 
+        System.out.println("Uploaded");
         Utils.windowsNotify("Uploaded file successfully", String.format("Extension: %s", extension));
     }
 

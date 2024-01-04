@@ -1,6 +1,8 @@
 package io.ianwzhang1.driveclip;
 
 import com.github.mervick.aes_everywhere.Aes256;
+import com.sshtools.twoslices.Toast;
+import com.sshtools.twoslices.ToastType;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -134,7 +136,8 @@ public class Utils {
     }
 
     public static void windowsNotify(String caption, String text) {
-        trayIcon.displayMessage(caption, text, TrayIcon.MessageType.INFO);
+        // Closing the following line may dismiss the message early.
+        Toast.toast(ToastType.INFO, DriveClipApplication.class.getClassLoader().getResource("icon.png").getPath(), caption, text);
     }
 
     public static byte[] imageToBytes(BufferedImage bufferedImage, String extension) throws IOException {

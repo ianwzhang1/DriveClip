@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="207.0" prefWidth="335.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.ianwzhang1.driveclip.CAController">
+<AnchorPane prefHeight="207.0" prefWidth="335.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.ianwzhang1.driveclip.CAController">
    <children>
       <Button layoutX="105.0" layoutY="143.0" mnemonicParsing="false" onAction="#upload" text="Upload" />
       <Button layoutX="177.0" layoutY="143.0" mnemonicParsing="false" onAction="#download" text="Download" />

@@ -44,7 +44,7 @@ public class CAController {
     }
 
     public void initialize() {
-        Utils.initTray();
+        // Utils.initTray(); // Tray temporarily disabled
         this.key = config.getString("key");
         if (key == null) {
             this.keyField.setStyle("-fx-background-color: #d75454");
