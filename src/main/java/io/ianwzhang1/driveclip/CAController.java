@@ -59,7 +59,7 @@ public class CAController {
         Clip clip = Utils.getClipboard();
 
         if (clip == null) {
-            Utils.windowsNotify("Failed", "No clip found in clipboard");
+            Utils.toast("Failed", "No clip found in clipboard");
             return;
         }
 
@@ -67,7 +67,7 @@ public class CAController {
 
         switch (clip.getFlavor()) {
             case STRING:
-                drive.uploadFile(clip, encrypted, "");
+                drive.uploadFile(clip, encrypted, null);
                 break;
             case FILELIST:
                 String filename = ((List<java.io.File>) clip.getData()).get(0).getName();
@@ -75,7 +75,7 @@ public class CAController {
                 drive.uploadFile(clip, encrypted, extensionIndex == -1 ? "" : filename.substring(extensionIndex + 1));
                 break;
             case IMAGE:
-                drive.uploadFile(clip, encrypted, "");
+                drive.uploadFile(clip, encrypted, null);
                 break;
         }
     }
@@ -101,7 +101,7 @@ public class CAController {
         try {
             data = Utils.decrypt(crypted, key);
         } catch (Exception e) {
-            Utils.windowsNotify("ERROR", "Bad Key");
+            Utils.toast("ERROR", "Bad Key");
             return;
         }
 
@@ -111,17 +111,17 @@ public class CAController {
                 Files.write(downloadedFile.toPath(), data); // Copy file data over
                 FileTransferable fileTransfer = new FileTransferable(downloadedFile);
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(fileTransfer, fileTransfer);
-                Utils.windowsNotify("Saved file to output." + extension, null);
+                Utils.toast("Saved file to output." + extension, null);
                 break;
             case STRING:
                 StringSelection selection = new StringSelection(new String(data));
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
-                Utils.windowsNotify("Set clipboard contents", null);
+                Utils.toast("Set clipboard contents", null);
                 break;
             case IMAGE:
                 ImageTransferable imgTransfer = new ImageTransferable(Utils.bytesToImage(data));
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(imgTransfer, imgTransfer);
-                Utils.windowsNotify("Downloaded image", null);
+                Utils.toast("Downloaded image", null);
                 break;
         }
     }
@@ -130,7 +130,7 @@ public class CAController {
         try {
             drive.getDrive();
         } catch (Exception e) {
-            Utils.windowsNotify("Failed to login", e.getMessage());
+            Utils.toast("Failed to login", e.getMessage());
         }
     }
 

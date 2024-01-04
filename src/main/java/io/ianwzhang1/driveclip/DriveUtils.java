@@ -82,7 +82,7 @@ public class DriveUtils {
 
     public void uploadFile(Clip clip, byte[] encrypted, String extension) throws Exception {
         if (encrypted == null) {
-            Utils.windowsNotify("Encryption error", null);
+            Utils.toast("Encryption error", null);
             return;
         }
 
@@ -104,7 +104,7 @@ public class DriveUtils {
         }
 
         System.out.println("Uploaded");
-        Utils.windowsNotify("Uploaded file successfully", String.format("Extension: %s", extension));
+        Utils.toast("Uploaded file successfully", String.format("Extension: %s", extension));
     }
 
     /**

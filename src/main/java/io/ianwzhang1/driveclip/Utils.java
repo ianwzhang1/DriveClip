@@ -1,9 +1,11 @@
 package io.ianwzhang1.driveclip;
 
 import com.github.mervick.aes_everywhere.Aes256;
-import com.sshtools.twoslices.Toast;
-import com.sshtools.twoslices.ToastType;
+import dorkbox.notify.Notify;
+import dorkbox.notify.Theme;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +27,7 @@ import java.util.regex.Pattern;
 public class Utils {
 
     public static TrayIcon trayIcon;
+    public static Image notifyImage;
 
     public static byte[] encrypt(byte[] txt, String key) {
         try {
@@ -135,9 +138,14 @@ public class Utils {
         }
     }
 
-    public static void windowsNotify(String caption, String text) {
+    public static void toast(@Nonnull String caption, @Nullable String text) {
         // Closing the following line may dismiss the message early.
-        Toast.toast(ToastType.INFO, DriveClipApplication.class.getClassLoader().getResource("icon.png").getPath(), caption, text);
+        Notify.Companion.create()
+                .title("DriveClip - " + caption)
+                .text(text == null ? "" : text)
+                .theme(Theme.Companion.getDefaultDark())
+                .hideAfter(3000)
+                .show();
     }
 
     public static byte[] imageToBytes(BufferedImage bufferedImage, String extension) throws IOException {
