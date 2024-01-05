@@ -5,6 +5,7 @@ import com.google.api.services.drive.model.File;
 import com.google.common.io.ByteStreams;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dorkbox.swingActiveRender.NullRepaintManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import org.apache.commons.configuration.ConfigurationException;
@@ -44,6 +45,7 @@ public class CAController {
     }
 
     public void initialize() {
+        NullRepaintManager.Companion.install();
         // Utils.initTray(); // Tray temporarily disabled
         this.key = config.getString("key");
         if (key == null) {

@@ -19,7 +19,9 @@ dependencies {
     implementation("com.google.apis:google-api-services-drive:v3-rev20220815-2.0.0")
     implementation("com.github.mervick:aes-everywhere-java:1.2.7")
     implementation("commons-configuration:commons-configuration:1.10")
+
     implementation("com.dorkbox:Notify:4.5")
+    // implementation("com.dorkbox:SystemTray:4.4")
 }
 
 javafx {

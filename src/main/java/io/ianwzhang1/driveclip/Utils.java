@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -121,31 +123,28 @@ public class Utils {
     }
 
     public static void initTray() {
-        SystemTray tray = SystemTray.getSystemTray();
-        Image image = Toolkit.getDefaultToolkit().createImage(DriveClipApplication.class.getClassLoader().getResource("icon.png"));
-
-        trayIcon = new TrayIcon(image, "DriveClip Tray");
-        trayIcon.setImageAutoSize(true);
-
-        trayIcon.addActionListener(e -> { // Doubleclicjk action
-            System.out.println("Action performed");
-        });
-
-        try {
-            tray.add(trayIcon);
-        } catch (AWTException e) {
-            System.out.println("Failed to add tray icon");
-        }
+//        SystemTray.SWING_UI = new CustomSwingUI();
+//
+//        SystemTray systemTray = SystemTray.get();
+//        if (systemTray == null) {
+//            throw new RuntimeException("Unable to load SystemTray!");
+//        }
+//
+//
+//        systemTray.setImage("grey_icon.png");
+//        systemTray.setStatus("Not Running");
+//
+//        systemTray.getMenu().add(new MenuItem("Quit", new MenuShortcut(1)));
     }
 
     public static void toast(@Nonnull String caption, @Nullable String text) {
         // Closing the following line may dismiss the message early.
-        Notify.Companion.create()
+        new Thread(() -> Notify.Companion.create()
                 .title("DriveClip - " + caption)
                 .text(text == null ? "" : text)
                 .theme(Theme.Companion.getDefaultDark())
                 .hideAfter(3000)
-                .show();
+                .show()).start();
     }
 
     public static byte[] imageToBytes(BufferedImage bufferedImage, String extension) throws IOException {
